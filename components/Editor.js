@@ -33,6 +33,14 @@ export default class extends Component {
 
       this.codeMirror.on('change', this.onChange);
       this.codeMirror.setValue(value);
+
+      /*
+        Without this, when browser's cache is disabled,
+        CodeMirror doesn't pick up the editor's font family ('Roboto mono')
+        to calculate the initial cursor height.
+        This results in cursor's height being 16px instead of 19px.
+       */
+      setTimeout(() => this.codeMirror.refresh(), 30);
     });
   }
 
