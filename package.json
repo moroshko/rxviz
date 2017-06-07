@@ -1,0 +1,77 @@
+{
+  "name": "RxViz",
+  "version": "1.0.0",
+  "description": "Animated playground for Rx Observables",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moroshko/rxviz.git"
+  },
+  "author": "Misha Moroshko <michael.moroshko@gmail.com>",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "dev": "node server.js",
+    "build": "next build",
+    "lint": "eslint components css lib pages ./*.js",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "prettier": "prettier --single-quote --write \"components/**/*.js\" \"css/**/*.js\" \"lib/**/*.js\" \"pages/**/*.js\" \"./*.js\"",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "codemirror": "^5.26.0",
+    "color": "^1.0.3",
+    "d3-path": "^1.0.5",
+    "d3-scale": "^1.0.6",
+    "express": "^4.15.3",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
+    "lodash.isfunction": "^3.0.8",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.isundefined": "^3.0.1",
+    "lodash.omit": "^4.5.0",
+    "lodash.set": "^4.3.2",
+    "next": "3.0.0-beta9",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-copy-to-clipboard": "^5.0.0",
+    "react-dom": "^15.5.4",
+    "react-measure": "^2.0.2",
+    "react-numeric-input": "moroshko/react-numeric-input",
+    "rxjs": "^5.4.0",
+    "tinyqueue": "^1.2.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^7.0.1",
+    "husky": "^0.13.4",
+    "jest": "^20.0.4",
+    "lint-staged": "^3.6.0",
+    "lodash.sortby": "^4.7.0",
+    "lolex": "^1.6.0",
+    "prettier": "^1.4.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run prettier",
+      "npm run lint",
+      "npm test",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "rx",
+    "rxjs",
+    "reactive",
+    "observable",
+    "stream",
+    "visualizer",
+    "visualization",
+    "svg",
+    "animation",
+    "react",
+    "react-component"
+  ],
+  "license": "MIT"
+}
