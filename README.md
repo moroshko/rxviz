@@ -1,8 +1,8 @@
-# RxViz
+# Rx Visualizer - Animated playground for Rx Observables
 
 Coming soon...
 
-## Running rxviz.com locally
+## Run locally
 
 ```shell
 npm run dev
