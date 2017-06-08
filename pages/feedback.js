@@ -30,6 +30,7 @@ export default class extends Component {
           .feedback {
             flex-grow: 1;
             overflow: auto;
+
             padding: 20px 30px;
             background-color: #fff;
           }

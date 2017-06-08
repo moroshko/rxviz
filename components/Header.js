@@ -39,38 +39,31 @@ export default () =>
         padding: 20px 25px;
         border-bottom: 1px solid #3b3f44;
       }
-
       .logo {
         flex-shrink: 0;
       }
-
       .headers-container {
         margin-left: 10px;
         align-self: baseline;
       }
-
       h1 {
         margin: 0;
         font-size: 20px;
         font-family: Montserrat;
         color: #e0168f;
       }
-
       h2 {
         margin: 0;
         font-size: 14px;
         opacity: 0.8;
       }
-
       .github-link {
         display: flex;
         margin-left: auto;
       }
-
       .github-icon {
         transition: fill .1s linear;
       }
-
       .github-link:hover .github-icon {
         fill: #fff;
       }

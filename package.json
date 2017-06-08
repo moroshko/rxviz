@@ -50,7 +50,7 @@
     "lint-staged": "^3.6.0",
     "lodash.sortby": "^4.7.0",
     "lolex": "^1.6.0",
-    "prettier": "^1.4.1"
+    "prettier": "^1.4.4"
   },
   "lint-staged": {
     "*.js": [

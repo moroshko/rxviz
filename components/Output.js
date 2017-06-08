@@ -63,7 +63,6 @@ export default class extends Component {
             flex: 1 0 50%;
             background-color: #fff;
           }
-
           .content {
             flex-grow: 1;
             margin-bottom: 37px;

@@ -35,12 +35,10 @@ const Sidebar = ({ activeItemId }) => {
           flex-direction: column;
           flex-shrink: 0;
         }
-
         .header {
           font-size: 18px;
           padding-left: 25px;
         }
-
         .examples-container {
           display: flex;
           flex-direction: column;
@@ -49,11 +47,9 @@ const Sidebar = ({ activeItemId }) => {
           padding: 0;
           overflow-y: auto;
         }
-
         li {
           padding: 0;
         }
-
         .custom {
           margin-top: 10px;
         }

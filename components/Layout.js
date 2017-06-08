@@ -70,7 +70,6 @@ export default class extends Component {
             background-color: #21252b;
             color: #eeeff0;
           }
-
           .sidebar-and-main {
             display: flex;
             flex-grow: 1;

@@ -175,11 +175,9 @@ export default class extends Component {
                       display: flex;
                       flex-shrink: 0;
                     }
-
                     .inner-container {
                       flex: 1 0 50%;
                     }
-
                     .second-inner-container {
                       display: flex;
                       align-items: center;
@@ -191,20 +189,15 @@ export default class extends Component {
                     .react-numeric-input b {
                       transition: transform .1s linear;
                     }
-
                     .react-numeric-input i {
                       transition: border-color .1s linear;
                     }
-
                     .react-numeric-input b:hover {
                       transform: scale(1.1);
                     }
-
-                    /* Please show me a better way! */
                     .react-numeric-input b:nth-child(2):hover i {
                       border-bottom-color: #fff !important;
                     }
-
                     .react-numeric-input b:nth-child(3):hover i {
                       border-top-color: #fff !important;
                     }

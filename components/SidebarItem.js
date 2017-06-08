@@ -14,15 +14,12 @@ const renderItem = ({ text, isActive }) =>
         opacity: 0.6;
         transition: opacity .1s linear;
       }
-
       a:hover {
         background-color: #2c3038;
       }
-
       a[href] {
         cursor: pointer;
       }
-
       .active {
         padding-left: 22px;
         border-left: 3px solid #e0168f;

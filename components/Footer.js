@@ -14,7 +14,6 @@ export default () =>
         bottom: 0;
         padding: 10px 25px;
       }
-
       .zeit-link {
         font-size: 12px;
         color: #000;
@@ -22,7 +21,6 @@ export default () =>
         transition: opacity .1s linear;
         text-decoration: none;
       }
-
       .zeit-link:hover {
         opacity: 1;
       }

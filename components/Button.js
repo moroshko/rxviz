@@ -73,35 +73,27 @@ export default class extends Component {
             opacity: 0.85;
             transition: transform .1s linear, opacity .1s linear;
           }
-
           button:hover {
             opacity: 1;
           }
-
           button:focus {
             outline: 0;
           }
-
           button:active {
             transform: scale(0.95);
           }
-
           button:disabled {
             opacity: 0.6;
           }
-
           span {
             margin-left: 5px;
           }
-
           .primary {
             background-color: #e0168f;
           }
-
           .secondary {
             background-color: #4b5262;
           }
-
           .small {
             padding: 0 13px;
             border-radius: 20px;

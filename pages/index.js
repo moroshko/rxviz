@@ -146,7 +146,6 @@ export default class extends Component {
             flex: 1;
             min-width: 0; /* https://stackoverflow.com/q/44192057/247243 */
           }
-
           .editor-and-output {
             display: flex;
             flex-grow: 1;
