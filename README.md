@@ -1,5 +1,25 @@
 # <a href='https://rxviz.com'><img src='https://user-images.githubusercontent.com/259753/26906261-eaa4738c-4ba0-11e7-97a1-016e39d885d2.png' height='60' alt='RxViz logo'></a>
 
+## Description
+
+RxViz simply visualizes a given Observable. You can type any JavaScript you want in the editor. We will evaluate it, and, if the last expression is an Observable, a nice animated visualization will appear. 
+
+To control the speed of the animation, **Time window** input is provided.
+
+Once the animation has ended, feel free to copy the resulting SVG to include it in your next Rx presentation.
+
+### How it works?
+
+RxViz treats the evaluated Observable as a black box. We rely only on the fact that Observable emits values over time. RxViz doesn't rely on the internal implementation of RxJS. This will allow us to visualize [TC39 Observables](https://github.com/tc39/proposal-observable) in the future.
+
+Technically, we subscribe to the given Observable, and, once a value is observed, we simply add it to the visualization. It's that simple!
+
+### How about higher order Observables?
+
+No different. Since a higher order Observable is simply an Observable whose values are Observables themselves, we just repeat the process recursively.
+
+When an Observable value is seen, we subscribe to it. At this point, we create a new "branch" in the visualization.
+
 ## Examples
 
 ### Basic interval
@@ -27,6 +47,7 @@
 
 ## Run locally
 
-```shell
+```bash
+npm install
 npm run dev
 ```
