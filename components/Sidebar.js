@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import codeExamples from '../lib/code-examples';
-import SidebarLink from './SidebarLink';
+import SidebarItem from './SidebarItem';
 
 const Sidebar = ({ activeItemId }) => {
   const exampleIds = Object.keys(codeExamples);
@@ -14,7 +14,7 @@ const Sidebar = ({ activeItemId }) => {
 
           return (
             <li className={`example ${exampleId}`} key={exampleId}>
-              <SidebarLink
+              <SidebarItem
                 text={name}
                 isActive={exampleId === activeItemId}
                 href={`/?exampleId=${exampleId}`}
@@ -24,7 +24,7 @@ const Sidebar = ({ activeItemId }) => {
           );
         })}
       </ul>
-      <SidebarLink
+      <SidebarItem
         text="Feedback"
         isActive={activeItemId === 'feedback'}
         href="/feedback"
