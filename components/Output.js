@@ -52,14 +52,22 @@ export default class extends Component {
 
     return (
       <div className="output">
-        {error
-          ? this.renderError()
-          : observable$ ? this.renderVisualization() : null}
+        <div className="content">
+          {error
+            ? this.renderError()
+            : observable$ ? this.renderVisualization() : null}
+        </div>
         <style jsx>{`
           .output {
+            display: flex;
             flex: 1 0 50%;
-            overflow-y: auto;
             background-color: #fff;
+          }
+
+          .content {
+            flex-grow: 1;
+            margin-bottom: 37px;
+            overflow-y: auto;
           }
         `}</style>
       </div>
