@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import Footer from './Footer';
 
 let mountCount = 0;
 
@@ -57,9 +58,11 @@ export default class extends Component {
           <Sidebar activeItemId={sidebarActiveItemId} />
           {children}
         </div>
+        <Footer />
         <style jsx>{`
           .container {
             height: 100vh;
+            position: relative;
             display: flex;
             flex-direction: column;
             font-family: Roboto, sans-serif;
