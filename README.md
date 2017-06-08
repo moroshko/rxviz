@@ -1,4 +1,4 @@
-# <a href='https://rxviz.com'><img src='https://user-images.githubusercontent.com/259753/26906261-eaa4738c-4ba0-11e7-97a1-016e39d885d2.png' height='60' alt='RxViz logo'></a>
+# <a href='https://rxviz.com'><img src='https://user-images.githubusercontent.com/259753/26937967-b6bd7262-4c27-11e7-97f3-29878d7ec468.png' height='60' alt='RxViz logo'></a>
 
 ## Description
 
