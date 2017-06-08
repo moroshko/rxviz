@@ -2,17 +2,21 @@ import Link from 'next/link';
 
 export default () =>
   <header className="container">
-    <svg className="logo" width="44" height="44" fillRule="evenodd">
-      <path
-        d="M 22,22 m -22,0 a 22,22 0 1,0 44,0 a 22,22 0 1,0 -44,0 Z M 18,13 v 18 l 14,-9 Z"
-        fill="#e0168f"
-      />
-    </svg>
+    <Link prefetch as="/" href="/?exampleId=basic-interval">
+      <a>
+        <svg className="logo" width="44" height="44" fillRule="evenodd">
+          <path
+            d="M 22,22 m -22,0 a 22,22 0 1,0 44,0 a 22,22 0 1,0 -44,0 Z M 18,13 v 18 l 14,-9 Z"
+            fill="#e0168f"
+          />
+        </svg>
+      </a>
+    </Link>
     <div className="headers-container">
-      <h1 className="header">
+      <h1>
         Rx Visualizer
       </h1>
-      <h2 className="subheader">
+      <h2>
         Animated playground for Rx Observables
       </h2>
     </div>
@@ -45,13 +49,14 @@ export default () =>
         align-self: baseline;
       }
 
-      .header {
+      h1 {
         margin: 0;
         font-size: 20px;
+        font-family: Montserrat;
         color: #e0168f;
       }
 
-      .subheader {
+      h2 {
         margin: 0;
         font-size: 14px;
         opacity: 0.8;
