@@ -83,6 +83,7 @@ export default class extends Component {
             transform: scale(0.95);
           }
           button:disabled {
+            transform: scale(0.95);
             opacity: 0.6;
           }
           span {
