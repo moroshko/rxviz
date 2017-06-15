@@ -52,9 +52,10 @@ When an Observable value is seen, we subscribe to it. At this point, we create a
 ## Thanks
 
 * [Vedran Arnautović](https://twitter.com/vedranio) for designing [rxviz.com](https://rxviz.com)
+* [Yuki Izumi](https://github.com/kivikakk) for always being helpful with random questions I have
 * [zeit.co](https://zeit.co) for outstanding developer experience with [next.js](https://github.com/zeit/next.js) and [domains](https://zeit.co/domains)
-* [Canny](https://canny.io) for efficiently collecting [user feedback](https://rxviz.canny.io/feature-requests)
 * [André Staltz](https://twitter.com/andrestaltz) for creating [rxmarbles.com](http://rxmarbles.com) and [awesome RxJS courses on egghead.io](https://egghead.io/courses#technology-rx)
+* [Canny](https://canny.io) for efficiently collecting [user feedback](https://rxviz.canny.io/feature-requests)
 
 ## Running locally
 
