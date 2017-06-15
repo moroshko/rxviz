@@ -1,6 +1,5 @@
 import { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import omit from 'lodash.omit';
 
 export default class extends Component {
@@ -10,43 +9,30 @@ export default class extends Component {
     htmlType: PropTypes.string,
     disabled: PropTypes.bool,
     icon: PropTypes.element.isRequired,
-    smallIconOffset: PropTypes.number,
+    smallIconXoffset: PropTypes.number,
     text: PropTypes.string.isRequired,
     style: PropTypes.object,
-    copyToClipboardText: PropTypes.string,
-    copyToClipboardOnCopy: PropTypes.func
+    onClick: PropTypes.func
   };
 
   static defaultProps = {
     disabled: false
   };
 
-  renderWithCopyToClipboard() {
-    const { copyToClipboardText, copyToClipboardOnCopy } = this.props;
-
-    return (
-      <CopyToClipboard
-        text={copyToClipboardText}
-        onCopy={copyToClipboardOnCopy}
-      >
-        {this.renderButton()}
-      </CopyToClipboard>
-    );
-  }
-
-  renderButton() {
+  render() {
     const {
       type,
       size,
       htmlType,
       disabled,
-      smallIconOffset,
+      smallIconXoffset,
       text,
-      style
+      style,
+      onClick
     } = this.props;
-    const iconStyle = size === 'small' && smallIconOffset
+    const iconStyle = size === 'small' && smallIconXoffset
       ? {
-          transform: `translate(${smallIconOffset})`
+          transform: `translate(${smallIconXoffset})`
         }
       : {};
     const icon = cloneElement(this.props.icon, iconStyle);
@@ -57,6 +43,7 @@ export default class extends Component {
         type={htmlType}
         disabled={disabled}
         style={size === 'large' ? style : omit(style, 'width')}
+        onClick={onClick}
       >
         {icon}
         {size === 'large' ? <span>{text}</span> : null}
@@ -65,6 +52,7 @@ export default class extends Component {
             display: flex;
             align-items: center;
             justify-content: center;
+
             height: 40px;
             border: 0;
             font-size: 14px;
@@ -83,8 +71,8 @@ export default class extends Component {
             transform: scale(0.95);
           }
           button:disabled {
-            transform: scale(0.95);
             opacity: 0.6;
+            transform: scale(1);
           }
           span {
             margin-left: 5px;
@@ -102,13 +90,5 @@ export default class extends Component {
         `}</style>
       </button>
     );
-  }
-
-  render() {
-    const { copyToClipboardText } = this.props;
-
-    return copyToClipboardText
-      ? this.renderWithCopyToClipboard()
-      : this.renderButton();
   }
 }

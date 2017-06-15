@@ -5,13 +5,29 @@ import Editor from '../components/Editor';
 import Output from '../components/Output';
 import codeExamples from '../lib/code-examples';
 import { getObservableFromCode } from '../lib/observable-from-code';
+// import { createSnippet, getSnippet } from '../api/snippets';
 
 export default class extends Component {
+  /*
+  static async getInitialProps({ query }) {
+    const { snippetId } = query;
+
+    //  snippetId will:
+    //    - exist in pages like /v/A38l6Ogy
+    //    - be undefined in pages like /examples/
+
+    return snippetId
+      ? getSnippet(snippetId).catch(() => ({
+          error: "Couldn't load code snippet"
+        }))
+      : Promise.resolve({});
+  }
+  */
+
   constructor(props) {
     super();
 
-    const { exampleId } = props.url.query;
-    const { code, timeWindow } = codeExamples[exampleId];
+    const { exampleId, code, timeWindow } = this.getCodeParams(props);
 
     this.state = {
       exampleId,
@@ -21,24 +37,53 @@ export default class extends Component {
       timeWindowInputValueBeforeChange: null,
       error: null,
       observable$: null,
-      svg: null
+      svg: null,
+      lastSnippetId: null
+    };
+  }
+
+  getCodeParams(props) {
+    if (props.code && props.timeWindow) {
+      return {
+        exampleId: 'custom',
+        code: props.code,
+        timeWindow: props.timeWindow
+      };
+    }
+
+    let { exampleId } = props.url.query;
+
+    if (!exampleId || !codeExamples[exampleId]) {
+      exampleId = 'basic-interval';
+    }
+
+    const { code, timeWindow } = codeExamples[exampleId];
+
+    return {
+      exampleId,
+      code,
+      timeWindow
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.query.exampleId !== this.props.url.query.exampleId) {
-      const { exampleId } = nextProps.url.query;
-      const { code, timeWindow } = codeExamples[exampleId];
+    const { exampleId, code, timeWindow } = this.getCodeParams(nextProps);
 
-      this.setState({
+    if (
+      exampleId !== this.props.url.query.exampleId ||
+      code !== this.props.url.query.code ||
+      timeWindow !== this.props.url.query.timeWindow
+    ) {
+      this.setState(() => ({
         exampleId,
         code,
         timeWindowInputValue: timeWindow / 1000,
         vizTimeWindow: timeWindow,
         error: null,
         observable$: null,
-        svg: null
-      });
+        svg: null,
+        lastSnippetId: null
+      }));
     }
   }
 
@@ -75,7 +120,8 @@ export default class extends Component {
     const {
       code,
       timeWindowInputValue,
-      timeWindowInputValueBeforeChange
+      timeWindowInputValueBeforeChange /*,
+      lastSnippetId*/
     } = this.state;
     const { error, observable$ } = getObservableFromCode(code);
     const newTimeWindowInputValue = timeWindowInputValue === null
@@ -88,12 +134,32 @@ export default class extends Component {
         timeWindowInputValue: newTimeWindowInputValue
       });
     } else {
+      const vizTimeWindow = newTimeWindowInputValue * 1000;
+
       this.setState({
         observable$,
         timeWindowInputValue: newTimeWindowInputValue,
-        vizTimeWindow: newTimeWindowInputValue * 1000,
+        vizTimeWindow,
         svg: null
       });
+
+      /*
+      createSnippet({
+        code,
+        timeWindow: vizTimeWindow,
+        snippetIdToDelete: lastSnippetId
+      })
+        .then(({ id }) => {
+          this.setState({
+            lastSnippetId: id
+          });
+
+          // Router.push(`/?snippetId=${id}`, `/v/${id}`);
+        })
+        .catch(() => {
+          // TODO
+        });
+      */
     }
   };
 
@@ -111,7 +177,8 @@ export default class extends Component {
       vizTimeWindow,
       error,
       observable$,
-      svg
+      svg,
+      lastSnippetId
     } = this.state;
 
     return (
@@ -124,6 +191,7 @@ export default class extends Component {
             onTimeWindowBlur={this.onTimeWindowInputValueBlur}
             svg={svg}
             onVisualize={this.onVisualize}
+            lastSnippetId={lastSnippetId}
           />
           <div className="editor-and-output">
             <Editor

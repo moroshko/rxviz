@@ -61,6 +61,7 @@ export default class extends Component {
           .output {
             display: flex;
             flex: 1 0 50%;
+            min-width: 0; /* https://stackoverflow.com/q/44192057/247243 */
             background-color: #fff;
           }
           .content {

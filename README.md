@@ -6,14 +6,14 @@
   * [Random error](#random-error)
   * [Higher order Observable](#higher-order-observable)
   * [Pause and resume](#pause-and-resume)
-* [How it works?](#how-it-works)
+* [How does it work?](#how-does-it-work)
   * [How about higher order Observables?](#how-about-higher-order-observables)
 * [Thanks](#thanks)
 * [Running locally](#running-locally)
 
 ## Description
 
-RxViz simply visualizes a given Observable. You can type any JavaScript you want in the editor. We will evaluate it, and, if the last expression is an Observable, a nice animated visualization will appear. 
+RxViz simply visualizes a given Observable. You can type any JavaScript you want in the editor. We will evaluate it, and, if the last expression is an Observable, a nice animated visualization will appear.
 
 To control the speed of the animation, **Time window** input is provided.
 
@@ -37,7 +37,7 @@ Once the animation has ended, feel free to copy the resulting SVG to include it 
 
 [![rxviz-pause-and-resume](https://user-images.githubusercontent.com/259753/26908310-bb0f8540-4bae-11e7-9bb7-9520ec567fdf.gif)](https://rxviz.com/examples/pause-and-resume)
 
-## How it works?
+## How does it work?
 
 RxViz treats the evaluated Observable as a black box. We rely only on the fact that Observable emits values over time. RxViz doesn't rely on the internal implementation of RxJS. This will allow us to visualize [TC39 Observables](https://github.com/tc39/proposal-observable) in the future.
 

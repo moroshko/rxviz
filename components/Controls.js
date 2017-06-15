@@ -2,12 +2,22 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Measure from 'react-measure';
 import NumericInput from 'react-numeric-input';
+import copy from 'copy-to-clipboard';
 import Button from './Button';
 import timeWindowInputStyles from '../css/timeWindowInput';
 
 const visualizeIcon = (
   <svg width="14" height="14">
     <path fill="#eeeff0" d="M0,0L12,7L0,14Z" />
+  </svg>
+);
+
+const shareIcon = (
+  <svg width="16" height="16" viewBox="0 0 24 24">
+    <path
+      fill="#eeeff0"
+      d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z"
+    />
   </svg>
 );
 
@@ -36,7 +46,8 @@ export default class extends Component {
     onTimeWindowChange: PropTypes.func.isRequired,
     onTimeWindowBlur: PropTypes.func.isRequired,
     svg: PropTypes.string,
-    onVisualize: PropTypes.func.isRequired
+    onVisualize: PropTypes.func.isRequired,
+    lastSnippetId: PropTypes.string
   };
 
   constructor() {
@@ -44,7 +55,9 @@ export default class extends Component {
 
     this.state = {
       width: null,
-      copiedSvg: false
+      copiedUrl: false,
+      copiedSvg: false,
+      shared: false
     };
   }
 
@@ -54,14 +67,14 @@ export default class extends Component {
     });
   };
 
-  onCopySvg = () => {
+  onCopyUrl = () => {
     this.setState({
-      copiedSvg: true
+      copiedUrl: true
     });
 
     setTimeout(() => {
       this.setState({
-        copiedSvg: false
+        copiedUrl: false
       });
     }, 3000);
   };
@@ -73,10 +86,14 @@ export default class extends Component {
       onTimeWindowChange,
       onTimeWindowBlur
     } = this.props;
+    const { width } = this.state;
 
     return (
       <div>
-        <label htmlFor="time-window-input">Time window (sec)</label>
+        <label htmlFor="time-window-input">
+          {width > 510 ? 'Time window' : null}
+          {width > 730 ? ' (sec)' : null}
+        </label>
         <NumericInput
           id="time-window-input"
           min={1}
@@ -100,7 +117,7 @@ export default class extends Component {
   getButtonSize() {
     const { width } = this.state;
 
-    return width >= 784 ? 'large' : 'small';
+    return width >= 650 ? 'large' : 'small';
   }
 
   renderVisualizeButton() {
@@ -110,9 +127,9 @@ export default class extends Component {
         size={this.getButtonSize()}
         htmlType="submit"
         icon={visualizeIcon}
-        smallIconOffset={2}
+        smallIconXoffset={2}
         text="Visualize"
-        style={{ marginLeft: 30 }}
+        style={{ marginLeft: 15 }}
       />
     );
   }
@@ -132,13 +149,66 @@ export default class extends Component {
         size={this.getButtonSize()}
         disabled={copiedSvg}
         icon={copiedSvg ? checkIcon : copyIcon}
-        text={copiedSvg ? 'Copied' : 'Copy SVG'}
-        style={{ width: 120 }}
-        copyToClipboardText={svg}
-        copyToClipboardOnCopy={this.onCopySvg}
+        text={copiedSvg ? 'SVG copied' : 'Copy SVG'}
+        style={{ width: 130 }}
+        onClick={this.onCopySvg}
       />
     );
   }
+
+  onCopySvg = () => {
+    const { svg } = this.props;
+
+    copy(svg);
+
+    this.setState({
+      copiedSvg: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        copiedSvg: false
+      });
+    }, 3000);
+  };
+
+  renderShareButton() {
+    const { lastSnippetId } = this.props;
+
+    if (!lastSnippetId) {
+      return null;
+    }
+
+    const { shared } = this.state;
+
+    return (
+      <Button
+        type="secondary"
+        size={this.getButtonSize()}
+        disabled={shared}
+        icon={shared ? checkIcon : shareIcon}
+        text={shared ? 'Link copied' : 'Share link'}
+        style={{ width: 130, marginLeft: 15 }}
+        onClick={this.onShare}
+      />
+    );
+  }
+
+  onShare = () => {
+    const { lastSnippetId } = this.props;
+
+    copy(`${location.origin}/v/${lastSnippetId}`);
+
+    this.setState({
+      shared: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        shared: false
+      });
+    }, 3000);
+  };
 
   onFormSubmit = event => {
     event.preventDefault();
@@ -152,7 +222,10 @@ export default class extends Component {
     return (
       <Measure bounds={true} onResize={this.onResize}>
         {({ measureRef }) =>
-          <div ref={measureRef}>
+          <div
+            ref={measureRef}
+            style={{ height: 60 /* To avoid a jump from SSR */ }}
+          >
             {width === null
               ? null
               : <div className="container">
@@ -168,6 +241,7 @@ export default class extends Component {
                   <div className="inner-container">
                     <div className="second-inner-container">
                       {this.renderCopySvgButton()}
+                      {this.renderShareButton()}
                     </div>
                   </div>
                   <style jsx>{`
@@ -176,13 +250,13 @@ export default class extends Component {
                       flex-shrink: 0;
                     }
                     .inner-container {
-                      flex: 1 0 50%;
+                      flex: 1 1 50%;
                     }
                     .second-inner-container {
                       display: flex;
                       align-items: center;
                       justify-content: flex-end;
-                      padding: 10px 25px 10px 30px;
+                      padding: 10px 25px 10px 0;
                     }
                   `}</style>
                   <style jsx global>{`
