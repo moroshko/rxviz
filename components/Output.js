@@ -1,25 +1,65 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Observable } from 'rxjs/Observable';
-import RxViz from './RxViz';
 
 export default class extends Component {
   static propTypes = {
-    timeWindow: PropTypes.number.isRequired,
-    observable$: PropTypes.instanceOf(Observable),
-    error: PropTypes.string,
+    vizParams: PropTypes.shape({
+      timeWindow: PropTypes.number.isRequired,
+      code: PropTypes.string.isRequired
+    }),
     onSvgStable: PropTypes.func.isRequired
   };
 
+  constructor() {
+    super();
+
+    this.state = {
+      error: null
+    };
+  }
+
+  componentDidMount() {
+    this.sandbox = `${location.origin}/sandbox`;
+
+    window.addEventListener('message', this.handleMessageFromSandbox);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('message', this.handleMessageFromSandbox);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { vizParams } = nextProps;
+
+    if (vizParams !== this.props.vizParams) {
+      if (vizParams === null) {
+        this.sendMessageToSandbox({
+          type: 'clear'
+        });
+      } else {
+        this.sendMessageToSandbox({
+          type: 'visualize',
+          vizParams
+        });
+      }
+    }
+  }
+
   renderError() {
-    const { error } = this.props;
+    const { error } = this.state;
 
     return (
       <div className="error">
         {error}
         <style jsx>{`
           .error {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
             font-family: 'Roboto Mono', monospace;
+            background-color: #fff;
             color: #eb121f;
             padding: 9px 30px;
           }
@@ -28,34 +68,48 @@ export default class extends Component {
     );
   }
 
-  renderVisualization() {
-    const { timeWindow, observable$, onSvgStable } = this.props;
-
-    return (
-      <div className="visualization">
-        <RxViz
-          timeWindow={timeWindow}
-          observable$={observable$}
-          onSvgStable={onSvgStable}
-        />
-        <style jsx>{`
-          .visualization {
-            padding: 30px 25px 30px 15px;
-          }
-        `}</style>
-      </div>
-    );
+  sendMessageToSandbox(data) {
+    this.sandboxWindow.postMessage(data, this.sandbox);
   }
 
+  handleMessageFromSandbox = ({ data }) => {
+    switch (data.type) {
+      case 'success':
+        this.setState({
+          error: null
+        });
+        break;
+
+      case 'error':
+        this.setState({
+          error: data.error
+        });
+        break;
+
+      case 'svg-ready':
+        this.props.onSvgStable(data.svg);
+        break;
+    }
+  };
+
+  saveSandboxWindow = iframe => {
+    if (iframe !== null) {
+      this.sandboxWindow = iframe.contentWindow;
+    }
+  };
+
   render() {
-    const { error, observable$ } = this.props;
+    const { error } = this.state;
 
     return (
       <div className="output">
         <div className="content">
-          {error
-            ? this.renderError()
-            : observable$ ? this.renderVisualization() : null}
+          <iframe
+            src="/sandbox"
+            sandbox="allow-scripts allow-same-origin"
+            ref={this.saveSandboxWindow}
+          />
+          {error ? this.renderError() : null}
         </div>
         <style jsx>{`
           .output {
@@ -65,9 +119,15 @@ export default class extends Component {
             background-color: #fff;
           }
           .content {
+            display: flex;
             flex-grow: 1;
+            position: relative;
             margin-bottom: 37px;
             overflow-y: auto;
+          }
+          iframe {
+            width: 100%;
+            border: 0;
           }
         `}</style>
       </div>

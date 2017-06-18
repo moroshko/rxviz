@@ -4,7 +4,6 @@ import Controls from '../components/Controls';
 import Editor from '../components/Editor';
 import Output from '../components/Output';
 import codeExamples from '../lib/code-examples';
-import { getObservableFromCode } from '../lib/observable-from-code';
 // import { createSnippet, getSnippet } from '../api/snippets';
 
 export default class extends Component {
@@ -33,10 +32,8 @@ export default class extends Component {
       exampleId,
       code,
       timeWindowInputValue: timeWindow / 1000,
-      vizTimeWindow: timeWindow,
       timeWindowInputValueBeforeChange: null,
-      error: null,
-      observable$: null,
+      vizParams: null,
       svg: null,
       lastSnippetId: null
     };
@@ -78,9 +75,7 @@ export default class extends Component {
         exampleId,
         code,
         timeWindowInputValue: timeWindow / 1000,
-        vizTimeWindow: timeWindow,
-        error: null,
-        observable$: null,
+        vizParams: null,
         svg: null,
         lastSnippetId: null
       }));
@@ -109,10 +104,9 @@ export default class extends Component {
     }
   };
 
-  onCodeChange = newCode => {
+  onCodeChange = code => {
     this.setState({
-      code: newCode,
-      error: null
+      code
     });
   };
 
@@ -123,44 +117,34 @@ export default class extends Component {
       timeWindowInputValueBeforeChange /*,
       lastSnippetId*/
     } = this.state;
-    const { error, observable$ } = getObservableFromCode(code);
     const newTimeWindowInputValue = timeWindowInputValue === null
       ? timeWindowInputValueBeforeChange
       : timeWindowInputValue;
+    const vizParams = {
+      timeWindow: newTimeWindowInputValue * 1000,
+      code
+    };
 
-    if (typeof error === 'string') {
-      this.setState({
-        error,
-        timeWindowInputValue: newTimeWindowInputValue
-      });
-    } else {
-      const vizTimeWindow = newTimeWindowInputValue * 1000;
+    this.setState({
+      timeWindowInputValue: newTimeWindowInputValue,
+      vizParams,
+      svg: null
+    });
 
-      this.setState({
-        observable$,
-        timeWindowInputValue: newTimeWindowInputValue,
-        vizTimeWindow,
-        svg: null
-      });
-
-      /*
-      createSnippet({
-        code,
-        timeWindow: vizTimeWindow,
-        snippetIdToDelete: lastSnippetId
-      })
-        .then(({ id }) => {
-          this.setState({
-            lastSnippetId: id
-          });
-
-          // Router.push(`/?snippetId=${id}`, `/v/${id}`);
-        })
-        .catch(() => {
-          // TODO
+    /*
+    createSnippet({
+      ...vizParams,
+      snippetIdToDelete: lastSnippetId
+    })
+      .then(({ id }) => {
+        this.setState({
+          lastSnippetId: id
         });
-      */
-    }
+      })
+      .catch(() => {
+        // TODO
+      });
+    */
   };
 
   onSvgStable = svg => {
@@ -174,9 +158,7 @@ export default class extends Component {
       exampleId,
       code,
       timeWindowInputValue,
-      vizTimeWindow,
-      error,
-      observable$,
+      vizParams,
       svg,
       lastSnippetId
     } = this.state;
@@ -199,12 +181,7 @@ export default class extends Component {
               onChange={this.onCodeChange}
               onCmdEnter={this.onVisualize}
             />
-            <Output
-              timeWindow={vizTimeWindow}
-              observable$={observable$}
-              error={error}
-              onSvgStable={this.onSvgStable}
-            />
+            <Output vizParams={vizParams} onSvgStable={this.onSvgStable} />
           </div>
         </main>
         <style jsx>{`
