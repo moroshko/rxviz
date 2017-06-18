@@ -39,7 +39,7 @@
     "react-dom": "^15.6.1",
     "react-measure": "^2.0.2",
     "react-numeric-input": "moroshko/react-numeric-input",
-    "rxjs": "^5.4.0",
+    "rxjs": "^5.4.1",
     "tinyqueue": "^1.2.2"
   },
   "devDependencies": {
