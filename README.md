@@ -13,11 +13,13 @@
 
 ## Description
 
-RxViz simply visualizes a given Observable. You can type any JavaScript you want in the editor. Your code will be evaluated, and, if the last expression is an Observable, a nice animated visualization will appear.
+RxViz simply visualizes a given Observable. Your JavaScript code will be evaluated, and, if the last expression is an Observable, a nice animated visualization will appear.
 
-To control the speed of the animation, **Time window** input is provided.
+You can also:
 
-Once the animation has ended, feel free to copy the resulting SVG to include it in your next Rx presentation.
+* Control the speed of the animation by modifying the **Time window** input.
+* Copy the resulting SVG to include in your next Rx presentation.
+* Share the visualization with your friends.
 
 ## Examples
 
@@ -55,7 +57,7 @@ When an Observable value is seen, we subscribe to it. At this point, we create a
 * [Yuki Izumi](https://github.com/kivikakk) for always being helpful with random technical questions
 * [zeit.co](https://zeit.co) for outstanding developer experience with [next.js](https://github.com/zeit/next.js) and [domains](https://zeit.co/domains)
 * [André Staltz](https://twitter.com/andrestaltz) for creating [rxmarbles.com](http://rxmarbles.com) and [awesome RxJS courses on egghead.io](https://egghead.io/courses#technology-rx)
-* [Canny](https://canny.io) for efficiently collecting [user feedback](https://rxviz.canny.io/feature-requests)
+* [Canny](https://canny.io) for collecting [your feedback](https://rxviz.canny.io/feature-requests)
 
 ## Running locally
 

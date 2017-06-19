@@ -3,6 +3,14 @@ import fetch from 'isomorphic-unfetch';
 const production = process.env.NODE_ENV === 'production';
 const url = production ? 'https://api.rxviz.com' : 'http://localhost:4000';
 
+const getData = response => {
+  if (response.ok) {
+    return response.json();
+  }
+
+  throw new Error(response.statusText);
+};
+
 export const createSnippet = ({ code, timeWindow, snippetIdToDelete }) =>
   fetch(`${url}/snippets`, {
     method: 'POST',
@@ -14,7 +22,6 @@ export const createSnippet = ({ code, timeWindow, snippetIdToDelete }) =>
       timeWindow,
       snippetIdToDelete
     })
-  }).then(response => response.json());
+  }).then(getData);
 
-export const getSnippet = id =>
-  fetch(`${url}/snippets/${id}`).then(response => response.json());
+export const getSnippet = id => fetch(`${url}/snippets/${id}`).then(getData);

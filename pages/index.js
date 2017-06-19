@@ -4,10 +4,9 @@ import Controls from '../components/Controls';
 import Editor from '../components/Editor';
 import Output from '../components/Output';
 import codeExamples from '../lib/code-examples';
-// import { createSnippet, getSnippet } from '../api/snippets';
+import { createSnippet, getSnippet } from '../api/snippets';
 
 export default class extends Component {
-  /*
   static async getInitialProps({ query }) {
     const { snippetId } = query;
 
@@ -21,7 +20,6 @@ export default class extends Component {
         }))
       : Promise.resolve({});
   }
-  */
 
   constructor(props) {
     super();
@@ -35,6 +33,7 @@ export default class extends Component {
       timeWindowInputValueBeforeChange: null,
       vizParams: null,
       svg: null,
+      snippetCreationFailed: false,
       lastSnippetId: null
     };
   }
@@ -77,6 +76,7 @@ export default class extends Component {
         timeWindowInputValue: timeWindow / 1000,
         vizParams: null,
         svg: null,
+        snippetCreationFailed: false,
         lastSnippetId: null
       }));
     }
@@ -114,8 +114,8 @@ export default class extends Component {
     const {
       code,
       timeWindowInputValue,
-      timeWindowInputValueBeforeChange /*,
-      lastSnippetId*/
+      timeWindowInputValueBeforeChange,
+      lastSnippetId
     } = this.state;
     const newTimeWindowInputValue = timeWindowInputValue === null
       ? timeWindowInputValueBeforeChange
@@ -131,20 +131,21 @@ export default class extends Component {
       svg: null
     });
 
-    /*
     createSnippet({
       ...vizParams,
       snippetIdToDelete: lastSnippetId
     })
       .then(({ id }) => {
         this.setState({
+          snippetCreationFailed: false,
           lastSnippetId: id
         });
       })
       .catch(() => {
-        // TODO
+        this.setState({
+          snippetCreationFailed: true
+        });
       });
-    */
   };
 
   onSvgStable = svg => {
@@ -160,6 +161,7 @@ export default class extends Component {
       timeWindowInputValue,
       vizParams,
       svg,
+      snippetCreationFailed,
       lastSnippetId
     } = this.state;
 
@@ -173,7 +175,8 @@ export default class extends Component {
             onTimeWindowBlur={this.onTimeWindowInputValueBlur}
             svg={svg}
             onVisualize={this.onVisualize}
-            lastSnippetId={lastSnippetId}
+            isShareAvailable={!snippetCreationFailed}
+            shareId={lastSnippetId}
           />
           <div className="editor-and-output">
             <Editor
