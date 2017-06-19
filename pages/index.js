@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Error from 'next/error';
 import Layout from '../components/Layout';
 import Controls from '../components/Controls';
 import Editor from '../components/Editor';
@@ -7,7 +8,7 @@ import codeExamples from '../lib/code-examples';
 import { createSnippet, getSnippet } from '../api/snippets';
 
 export default class extends Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, res }) {
     const { snippetId } = query;
 
     //  snippetId will:
@@ -15,18 +16,26 @@ export default class extends Component {
     //    - be undefined in pages like /examples/
 
     return snippetId
-      ? getSnippet(snippetId).catch(() => ({
-          error: "Couldn't load code snippet"
-        }))
+      ? getSnippet(snippetId).catch(() => {
+          // on the client, res will be undefined
+          if (res) {
+            res.statusCode = 404;
+          }
+
+          return {
+            error: "Couldn't load code snippet"
+          };
+        })
       : Promise.resolve({});
   }
 
   constructor(props) {
     super();
 
-    const { exampleId, code, timeWindow } = this.getCodeParams(props);
+    const { error, exampleId, code, timeWindow } = this.getCodeParams(props);
 
     this.state = {
+      error,
       exampleId,
       code,
       timeWindowInputValue: timeWindow / 1000,
@@ -40,6 +49,7 @@ export default class extends Component {
 
   getCodeParams(props) {
     if (props.code && props.timeWindow) {
+      // came from /v/hashid
       return {
         exampleId: 'custom',
         code: props.code,
@@ -49,8 +59,16 @@ export default class extends Component {
 
     let { exampleId } = props.url.query;
 
-    if (!exampleId || !codeExamples[exampleId]) {
-      exampleId = 'basic-interval';
+    if (!exampleId) {
+      return {
+        error: 'Unknown page'
+      };
+    }
+
+    if (!codeExamples[exampleId]) {
+      return {
+        error: 'Unknown example'
+      };
     }
 
     const { code, timeWindow } = codeExamples[exampleId];
@@ -63,14 +81,16 @@ export default class extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { exampleId, code, timeWindow } = this.getCodeParams(nextProps);
+    const { error, exampleId, code, timeWindow } = this.getCodeParams(
+      nextProps
+    );
 
     if (
-      exampleId !== this.props.url.query.exampleId ||
-      code !== this.props.url.query.code ||
-      timeWindow !== this.props.url.query.timeWindow
+      error !== this.props.error ||
+      exampleId !== this.props.url.query.exampleId
     ) {
       this.setState(() => ({
+        error,
         exampleId,
         code,
         timeWindowInputValue: timeWindow / 1000,
@@ -155,6 +175,12 @@ export default class extends Component {
   };
 
   render() {
+    const { error } = this.state;
+
+    if (error) {
+      return <Error statusCode={404} />;
+    }
+
     const {
       exampleId,
       code,
