@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Error from 'next/error';
+import Error from '../components/Error';
 import Layout from '../components/Layout';
 import Controls from '../components/Controls';
 import Editor from '../components/Editor';
@@ -11,34 +11,56 @@ export default class extends Component {
   static async getInitialProps({ query, res }) {
     const { snippetId } = query;
 
-    //  snippetId will:
-    //    - exist in pages like /v/A38l6Ogy
-    //    - be undefined in pages like /examples/
-
-    return snippetId
-      ? getSnippet(snippetId).catch(() => {
+    if (snippetId) {
+      // came from /v/hashid
+      return getSnippet(snippetId)
+        .then(({ code, timeWindow }) => ({
+          exampleId: 'custom',
+          code,
+          timeWindow
+        }))
+        .catch(() => {
           // on the client, res will be undefined
           if (res) {
             res.statusCode = 404;
           }
 
           return {
-            error: "Couldn't load code snippet"
+            errorStatusCode: 404
           };
-        })
-      : Promise.resolve({});
+        });
+    }
+
+    // came from /examples/exampleId
+    const { exampleId } = query;
+
+    if (exampleId && codeExamples[exampleId]) {
+      const { code, timeWindow } = codeExamples[exampleId];
+
+      return {
+        exampleId,
+        code,
+        timeWindow
+      };
+    }
+
+    return {
+      errorStatusCode: 404
+    };
   }
 
   constructor(props) {
     super();
 
-    const { error, exampleId, code, timeWindow } = this.getCodeParams(props);
+    this.state = this.resetState(props);
+  }
 
-    this.state = {
-      error,
-      exampleId,
-      code,
-      timeWindowInputValue: timeWindow / 1000,
+  resetState(props) {
+    return {
+      errorStatusCode: props.errorStatusCode,
+      exampleId: props.exampleId,
+      code: props.code,
+      timeWindowInputValue: props.timeWindow / 1000,
       timeWindowInputValueBeforeChange: null,
       vizParams: null,
       svg: null,
@@ -47,58 +69,16 @@ export default class extends Component {
     };
   }
 
-  getCodeParams(props) {
-    if (props.code && props.timeWindow) {
-      // came from /v/hashid
-      return {
-        exampleId: 'custom',
-        code: props.code,
-        timeWindow: props.timeWindow
-      };
-    }
-
-    let { exampleId } = props.url.query;
-
-    if (!exampleId) {
-      return {
-        error: 'Unknown page'
-      };
-    }
-
-    if (!codeExamples[exampleId]) {
-      return {
-        error: 'Unknown example'
-      };
-    }
-
-    const { code, timeWindow } = codeExamples[exampleId];
-
-    return {
-      exampleId,
-      code,
-      timeWindow
-    };
-  }
-
   componentWillReceiveProps(nextProps) {
-    const { error, exampleId, code, timeWindow } = this.getCodeParams(
-      nextProps
-    );
+    const { errorStatusCode, exampleId, code, timeWindow } = nextProps;
 
     if (
-      error !== this.props.error ||
-      exampleId !== this.props.url.query.exampleId
+      errorStatusCode !== this.props.errorStatusCode ||
+      exampleId !== this.props.exampleId ||
+      code !== this.props.code ||
+      timeWindow !== this.props.timeWindow
     ) {
-      this.setState(() => ({
-        error,
-        exampleId,
-        code,
-        timeWindowInputValue: timeWindow / 1000,
-        vizParams: null,
-        svg: null,
-        snippetCreationFailed: false,
-        lastSnippetId: null
-      }));
+      this.setState(this.resetState(nextProps));
     }
   }
 
@@ -175,10 +155,10 @@ export default class extends Component {
   };
 
   render() {
-    const { error } = this.state;
+    const { errorStatusCode } = this.state;
 
-    if (error) {
-      return <Error statusCode={404} />;
+    if (errorStatusCode) {
+      return <Error statusCode={errorStatusCode} />;
     }
 
     const {
