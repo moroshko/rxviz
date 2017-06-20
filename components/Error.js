@@ -1,7 +1,8 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Rx from 'rxjs';
-import Head from 'next/head';
+import Link from 'next/link';
+import Layout from './Layout';
 import RxViz from './RxViz';
 
 const delay = 1000;
@@ -11,7 +12,7 @@ const getVizParams = word => {
   return {
     observable$: Rx.Observable.interval(delay).map(i => letters[i]),
     timeWindow: (letters.length + 1) * delay,
-    width: (letters.length + 1) * 40
+    width: 360
   };
 };
 
@@ -27,62 +28,80 @@ export default class extends PureComponent {
       case 404:
         return {
           vizWord: '404',
-          text: "This page doesn't exist."
+          header: "This page doesn't exist."
         };
 
       default:
         return {
           vizWord: 'SORRY',
-          text: 'Something went wrong.'
+          header: 'Something went wrong.'
         };
     }
   }
 
   render() {
-    const { vizWord, text } = this.getMessageDetails();
+    const { vizWord, header } = this.getMessageDetails();
     const { observable$, timeWindow, width } = getVizParams(vizWord);
 
     return (
-      <div className="container">
-        <Head>
-          <title>RxViz - Error</title>
-          <meta
-            name="description"
-            content="Visualize any Rx Observable, and export SVG of the marble diagram."
-          />
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-          <link rel="shortcut icon" href="/static/favicon.png" />
-          <link
-            href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Montserrat:700"
-            rel="stylesheet"
-          />
-          <style>{`body { margin: 0; }`}</style>
-        </Head>
-        <div style={{ width, height: 63 }}>
-          <RxViz timeWindow={timeWindow} observable$={observable$} />
-        </div>
-        <div className="text">
-          {text}
+      <Layout renderSidebar={false}>
+        <div className="container">
+          <div style={{ width, height: 63 }}>
+            <RxViz timeWindow={timeWindow} observable$={observable$} />
+          </div>
+          <div className="inner-container">
+            <h2 className="header">
+              {header}
+            </h2>
+            <div className="instructions">
+              Here are some pages you might want to visit instead:
+              <ul>
+                <li>
+                  <Link prefetch as="/" href="/?exampleId=basic-interval">
+                    <a>
+                      Rx Visualizer home page
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="https://github.com/moroshko/rxviz">
+                    <a>
+                      Rx Visualizer on GitHub
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <style jsx>{`
           .container {
-            height: 100vh;
             display: flex;
             flex-direction: column;
+            flex-grow: 1;
             align-items: center;
             justify-content: center;
-            font-family: Roboto, sans-serif;
-            font-size: 14px;
+            background-color: #fff;
+            color: #000;
           }
-          .text {
-            margin-left: 20px;
+          .inner-container {
+            margin-left: 15px;
+          }
+          .header {
+            font-size: 18px;
+          }
+          .instructions {
+            margin-top: 30px;
+          }
+          ul {
+            padding: 0;
+            list-style-type: none;
+          }
+          li {
+            padding-bottom: 10px;
           }
         `}</style>
-      </div>
+      </Layout>
     );
   }
 }

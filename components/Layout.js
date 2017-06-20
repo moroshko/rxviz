@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -7,6 +8,18 @@ import Footer from './Footer';
 let mountCount = 0;
 
 export default class extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    renderSidebar: PropTypes.bool,
+    sidebarActiveItemId: PropTypes.number,
+    children: PropTypes.any
+  };
+
+  static defaultProps = {
+    renderSidebar: true,
+    title: 'Animated playground for Rx Observables'
+  };
+
   componentDidMount() {
     if (location.host === 'rxviz.com' && ++mountCount === 1) {
       const script = document.createElement('script');
@@ -27,11 +40,7 @@ export default class extends Component {
   }
 
   render() {
-    const {
-      title = 'Animated playground for Rx Observables',
-      sidebarActiveItemId,
-      children
-    } = this.props;
+    const { title, renderSidebar, sidebarActiveItemId, children } = this.props;
 
     return (
       <div className="container">
@@ -54,8 +63,10 @@ export default class extends Component {
           <style>{`body { margin: 0; }`}</style>
         </Head>
         <Header />
-        <div className="sidebar-and-main">
-          <Sidebar activeItemId={sidebarActiveItemId} />
+        <div className="inner-container">
+          {renderSidebar
+            ? <Sidebar activeItemId={sidebarActiveItemId} />
+            : null}
           {children}
         </div>
         <Footer />
@@ -70,7 +81,7 @@ export default class extends Component {
             background-color: #21252b;
             color: #eeeff0;
           }
-          .sidebar-and-main {
+          .inner-container {
             display: flex;
             flex-grow: 1;
           }
