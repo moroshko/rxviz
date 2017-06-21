@@ -203,7 +203,8 @@ export default class extends Component {
           .editor-and-output {
             display: flex;
             flex-grow: 1;
-            min-width: 0; /* https://stackoverflow.com/q/44192057/247243 */
+            min-width: 0;
+            /* https://stackoverflow.com/q/44192057/247243 */
           }
         `}</style>
       </Layout>

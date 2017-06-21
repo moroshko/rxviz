@@ -21,6 +21,20 @@ export default class extends PureComponent {
     statusCode: PropTypes.number
   };
 
+  constructor(props) {
+    super(props);
+
+    const { vizWord, header } = this.getMessageDetails();
+    const { observable$, timeWindow, width } = getVizParams(vizWord);
+
+    this.state = {
+      header,
+      observable$,
+      timeWindow,
+      width
+    };
+  }
+
   getMessageDetails() {
     const { statusCode } = this.props;
 
@@ -39,9 +53,18 @@ export default class extends PureComponent {
     }
   }
 
+  animate = innerContainer => {
+    if (innerContainer !== null) {
+      const { timeWindow } = this.state;
+
+      setTimeout(() => {
+        innerContainer.classList.add('visible');
+      }, timeWindow + 500);
+    }
+  };
+
   render() {
-    const { vizWord, header } = this.getMessageDetails();
-    const { observable$, timeWindow, width } = getVizParams(vizWord);
+    const { header, observable$, timeWindow, width } = this.state;
 
     return (
       <Layout renderSidebar={false}>
@@ -49,7 +72,7 @@ export default class extends PureComponent {
           <div style={{ width, height: 63 }}>
             <RxViz timeWindow={timeWindow} observable$={observable$} />
           </div>
-          <div className="inner-container">
+          <div className="inner-container" ref={this.animate}>
             <h2 className="header">
               {header}
             </h2>
@@ -86,6 +109,13 @@ export default class extends PureComponent {
           }
           .inner-container {
             margin-left: 15px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .2s linear, transform .2s linear;
+          }
+          .inner-container.visible {
+            opacity: 1;
+            transform: translateY(0);
           }
           .header {
             font-size: 18px;
