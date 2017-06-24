@@ -1,6 +1,6 @@
 Feature Requests:
 
-  Please vote and discuss here: https://rxviz.canny.io/feature-requests
+  Please vote and discuss here: https://rxviz.com/feedback
 
 Bugs/Questions:
 

@@ -57,7 +57,7 @@ When an Observable value is seen, we subscribe to it. At this point, we create a
 * [Yuki Izumi](https://github.com/kivikakk) for always being helpful with random technical questions
 * [zeit.co](https://zeit.co) for outstanding developer experience with [next.js](https://github.com/zeit/next.js) and [domains](https://zeit.co/domains)
 * [André Staltz](https://twitter.com/andrestaltz) for creating [rxmarbles.com](http://rxmarbles.com) and [awesome RxJS courses on egghead.io](https://egghead.io/courses#technology-rx)
-* [Canny](https://canny.io) for collecting [your feedback](https://rxviz.canny.io/feature-requests)
+* [Canny](https://canny.io) for collecting [your feedback](https://rxviz.com/feedback)
 
 ## Running locally
 
