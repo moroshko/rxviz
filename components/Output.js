@@ -121,8 +121,6 @@ export default class extends Component {
           .content {
             display: flex;
             flex-grow: 1;
-            position: relative;
-            margin-bottom: 37px;
             overflow-y: auto;
           }
           iframe {

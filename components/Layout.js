@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Footer from './Footer';
 
 let mountCount = 0;
 
@@ -69,7 +68,6 @@ export default class extends Component {
             : null}
           {children}
         </div>
-        <Footer />
         <style jsx>{`
           .container {
             height: 100vh;
