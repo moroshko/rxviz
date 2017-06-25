@@ -11,7 +11,7 @@ export default class extends Component {
   static propTypes = {
     title: PropTypes.string,
     renderSidebar: PropTypes.bool,
-    sidebarActiveItemId: PropTypes.number,
+    sidebarActiveItemId: PropTypes.string,
     children: PropTypes.any
   };
 
