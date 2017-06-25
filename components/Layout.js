@@ -82,6 +82,7 @@ export default class extends Component {
           .inner-container {
             display: flex;
             flex-grow: 1;
+            min-height: 0; /* Needed for Firefox */
           }
         `}</style>
       </div>
