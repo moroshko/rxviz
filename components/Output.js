@@ -122,6 +122,8 @@ export default class extends Component {
             display: flex;
             flex-grow: 1;
             overflow-y: auto;
+            position: relative;
+            /* Needed for error, which is positioned absolutely */
           }
           iframe {
             width: 100%;

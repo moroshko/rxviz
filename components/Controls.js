@@ -117,6 +117,8 @@ export default class extends Component {
         />
         <style jsx>{`
           div {
+            display: flex;
+            align-items: center;
             white-space: nowrap;
           }
         `}</style>
@@ -160,7 +162,7 @@ export default class extends Component {
         disabled={copiedSvg}
         icon={copiedSvg ? checkIcon : copyIcon}
         text={copiedSvg ? 'SVG copied' : 'Copy SVG'}
-        style={{ width: 130 }}
+        style={{ width: 135 }}
         onClick={this.onCopySvg}
       />
     );
