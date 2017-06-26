@@ -83,6 +83,8 @@ export default class ObservableValues extends Component {
           const strokeWidth = isObservable ? 0 : shapeStrokeWidth;
           const textStyle = {
             fill: mainColor,
+            /* Temporarily needed for Firefox. See: https://stackoverflow.com/a/44744392/247243 */
+            dominantBaseline: 'central',
             ...valueObj.textStyle
           };
           const addMouseHandlers = hasHoverTooltip(
