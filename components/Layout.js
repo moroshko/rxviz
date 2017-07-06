@@ -4,8 +4,6 @@ import Head from 'next/head';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-let mountCount = 0;
-
 export default class extends Component {
   static propTypes = {
     title: PropTypes.string,
@@ -18,25 +16,6 @@ export default class extends Component {
     renderSidebar: true,
     title: 'Animated playground for Rx Observables'
   };
-
-  componentDidMount() {
-    if (location.host === 'rxviz.com' && ++mountCount === 1) {
-      const script = document.createElement('script');
-
-      script.text = `
-(function(h,o,t,j,a,r){
-  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-  h._hjSettings={hjid:523182,hjsv:5};
-  a=o.getElementsByTagName('head')[0];
-  r=o.createElement('script');r.async=1;
-  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-  a.appendChild(r);
-})(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
-`;
-
-      document.body.appendChild(script);
-    }
-  }
 
   render() {
     const { title, renderSidebar, sidebarActiveItemId, children } = this.props;
