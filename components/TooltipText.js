@@ -27,9 +27,14 @@ export default class TooltipText extends Component {
   render() {
     const { text, textStyle } = this.props;
     const lines = text.split('\n');
+    const style = {
+      /* Temporarily needed for Firefox. See: https://stackoverflow.com/a/44744392/247243 */
+      dominantBaseline: 'text-before-edge',
+      ...textStyle
+    };
 
     return (
-      <text style={textStyle || null}>
+      <text style={style}>
         {lines.map(this.renderLine)}
       </text>
     );

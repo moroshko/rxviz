@@ -1,11 +1,10 @@
 import { Component } from 'react';
 import isUndefined from 'lodash.isundefined';
 
-const svgStyle = {
-  display:
-    'block' /* SVG defaults to 'inline',
-               which is taking up unwanted vertical space.
-             */
+const divStyle = {
+  width: 0,
+  height: 0,
+  overflow: 'hidden'
 };
 
 export default class MeasureSvgElements extends Component {
@@ -81,9 +80,12 @@ export default class MeasureSvgElements extends Component {
     }
 
     return (
-      <svg width="0" height="0" style={svgStyle} ref={this.storeSvgReference}>
-        {children}
-      </svg>
+      <div style={divStyle}>
+        {/* See: https://stackoverflow.com/q/44883800/247243 */}
+        <svg width="1" height="1" ref={this.storeSvgReference}>
+          {children}
+        </svg>
+      </div>
     );
   }
 }
