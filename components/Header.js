@@ -13,12 +13,8 @@ export default () =>
       </a>
     </Link>
     <div className="headers-container">
-      <h1>
-        Rx Visualizer
-      </h1>
-      <h2>
-        Animated playground for Rx Observables
-      </h2>
+      <h1>Rx Visualizer</h1>
+      <h2>Animated playground for Rx Observables</h2>
     </div>
     <Link href="https://github.com/moroshko/rxviz">
       <a className="github-link" title="Visit RxViz GitHub page">

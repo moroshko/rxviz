@@ -117,9 +117,10 @@ export default class extends Component {
       timeWindowInputValueBeforeChange,
       lastSnippetId
     } = this.state;
-    const newTimeWindowInputValue = timeWindowInputValue === null
-      ? timeWindowInputValueBeforeChange
-      : timeWindowInputValue;
+    const newTimeWindowInputValue =
+      timeWindowInputValue === null
+        ? timeWindowInputValueBeforeChange
+        : timeWindowInputValue;
     const vizParams = {
       timeWindow: newTimeWindowInputValue * 1000,
       code

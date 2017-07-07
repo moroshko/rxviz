@@ -81,16 +81,12 @@ export default class extends PureComponent {
               <ul>
                 <li>
                   <Link prefetch as="/" href="/?exampleId=basic-interval">
-                    <a>
-                      Rx Visualizer home page
-                    </a>
+                    <a>Rx Visualizer home page</a>
                   </Link>
                 </li>
                 <li>
                   <Link href="https://github.com/moroshko/rxviz">
-                    <a>
-                      Rx Visualizer on GitHub
-                    </a>
+                    <a>Rx Visualizer on GitHub</a>
                   </Link>
                 </li>
               </ul>

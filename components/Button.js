@@ -30,11 +30,12 @@ export default class extends Component {
       style,
       onClick
     } = this.props;
-    const iconStyle = size === 'small' && smallIconXoffset
-      ? {
-          transform: `translate(${smallIconXoffset})`
-        }
-      : {};
+    const iconStyle =
+      size === 'small' && smallIconXoffset
+        ? {
+            transform: `translate(${smallIconXoffset})`
+          }
+        : {};
     const icon = cloneElement(this.props.icon, iconStyle);
 
     return (
@@ -46,7 +47,11 @@ export default class extends Component {
         onClick={onClick}
       >
         {icon}
-        {size === 'large' ? <span>{text}</span> : null}
+        {size === 'large'
+          ? <span>
+              {text}
+            </span>
+          : null}
         <style jsx>{`
           button {
             display: flex;

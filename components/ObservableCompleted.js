@@ -59,10 +59,11 @@ export default class ObservableCompleted extends Component {
     const { height, mainColor, shapeOuterSize, scale, style } = this.props;
     const { time, lastValueBeforeCompletedTime } = completed;
     const x = scale(time);
-    const lineHeight = typeof lastValueBeforeCompletedTime === 'number' &&
+    const lineHeight =
+      typeof lastValueBeforeCompletedTime === 'number' &&
       scale(lastValueBeforeCompletedTime) + shapeOuterSize / 2 >= x
-      ? 1.5 * shapeOuterSize
-      : shapeOuterSize;
+        ? 1.5 * shapeOuterSize
+        : shapeOuterSize;
     const y1 = (height - lineHeight) / 2;
 
     return (
