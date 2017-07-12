@@ -28,6 +28,8 @@ export default class extends Component {
     this.output = origin;
     this.outputWindow = source;
 
+    this.clearContainer();
+
     switch (data.type) {
       case 'clear':
         this.setState({
@@ -38,7 +40,9 @@ export default class extends Component {
 
       case 'visualize': {
         const { timeWindow, code } = data.vizParams;
-        const { error, observable$ } = getObservableFromCode(code);
+        const { error, observable$ } = getObservableFromCode(code, {
+          output: this.container
+        });
 
         if (error) {
           this.sendMessageToOutput({ type: 'error', error });
@@ -55,26 +59,47 @@ export default class extends Component {
     }
   };
 
+  clearContainer() {
+    Array.from(this.container.children).forEach(child => {
+      if (child !== this.vizContainer) {
+        child.remove();
+      }
+    });
+  }
+
   onSvgStable = svg => {
     this.sendMessageToOutput({ type: 'svg-ready', svg });
+  };
+
+  storeContainer = container => {
+    if (container !== null) {
+      this.container = container;
+    }
+  };
+
+  storeVizContainer = vizContainer => {
+    if (vizContainer !== null) {
+      this.vizContainer = vizContainer;
+    }
   };
 
   render() {
     const { timeWindow, observable$ } = this.state;
 
-    if (!timeWindow || !observable$) {
-      return null;
-    }
-
     return (
-      <div className="visualization">
-        <RxViz
-          timeWindow={timeWindow}
-          observable$={observable$}
-          onSvgStable={this.onSvgStable}
-        />
+      <div className="container" ref={this.storeContainer}>
+        {/* This div is needed so that users could append/prepend to the container. */}
+        <div ref={this.storeVizContainer}>
+          {timeWindow && observable$
+            ? <RxViz
+                timeWindow={timeWindow}
+                observable$={observable$}
+                onSvgStable={this.onSvgStable}
+              />
+            : null}
+        </div>
         <style jsx>{`
-          .visualization {
+          .container {
             padding: 30px 25px 30px 15px;
           }
         `}</style>
