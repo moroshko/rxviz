@@ -15,7 +15,8 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "prettier": "prettier --single-quote --write \"components/**/*.js\" \"css/**/*.js\" \"lib/**/*.js\" \"pages/**/*.js\" \"./*.js\"",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "deploy": "now"
   },
   "dependencies": {
     "codemirror": "^5.26.0",
@@ -52,6 +53,7 @@
     "lint-staged": "^3.6.1",
     "lodash.sortby": "^4.7.0",
     "lolex": "^1.6.0",
+    "now": "^9.0.1",
     "prettier": "^1.4.4"
   },
   "lint-staged": {
