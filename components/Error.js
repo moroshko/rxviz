@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Rx from 'rxjs';
+import { Observable } from 'rxjs';
 import Link from 'next/link';
 import Layout from './Layout';
 import RxViz from './RxViz';
@@ -10,7 +10,7 @@ const getVizParams = word => {
   const letters = word.split('');
 
   return {
-    observable$: Rx.Observable.interval(delay).map(i => letters[i]),
+    observable$: Observable.interval(delay).map(i => letters[i]),
     timeWindow: (letters.length + 1) * delay,
     width: 360
   };

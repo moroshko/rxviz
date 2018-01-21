@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Measure from 'react-measure';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import isFunction from 'lodash.isfunction';
 import RxVizSnapshot from './RxVizSnapshot';
 import { isTimeout, updateData } from '../lib/data-parser';
