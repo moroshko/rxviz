@@ -40,7 +40,7 @@
     "react-ga": "^2.2.0",
     "react-measure": "^2.0.2",
     "react-numeric-input": "moroshko/react-numeric-input",
-    "rxjs": "^5.4.1",
+    "rxjs": "^5.5.6",
     "tinyqueue": "^1.2.2"
   },
   "devDependencies": {
