@@ -25,3 +25,14 @@ export const createSnippet = ({ code, timeWindow, snippetIdToDelete }) =>
   }).then(getData);
 
 export const getSnippet = id => fetch(`${url}/snippets/${id}`).then(getData);
+
+export const shareSnippet = id =>
+  fetch(`${url}/snippets/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      isShared: true
+    })
+  }).then(getData);

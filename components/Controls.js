@@ -57,7 +57,8 @@ export default class extends Component {
     svg: PropTypes.string,
     onVisualize: PropTypes.func.isRequired,
     isShareAvailable: PropTypes.bool.isRequired,
-    shareId: PropTypes.string
+    shareId: PropTypes.string,
+    onShare: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -65,7 +66,6 @@ export default class extends Component {
 
     this.state = {
       width: null,
-      copiedUrl: false,
       copiedSvg: false,
       shareState: 'ready' // 'shared', 'error'
     };
@@ -75,18 +75,6 @@ export default class extends Component {
     this.setState({
       width: bounds.width
     });
-  };
-
-  onCopyUrl = () => {
-    this.setState({
-      copiedUrl: true
-    });
-
-    setTimeout(() => {
-      this.setState({
-        copiedUrl: false
-      });
-    }, 3000);
   };
 
   renderTimeWindowInput() {
@@ -215,10 +203,11 @@ export default class extends Component {
   }
 
   onShare = () => {
-    const { isShareAvailable, shareId } = this.props;
+    const { isShareAvailable, shareId, onShare } = this.props;
 
     if (isShareAvailable) {
       copy(`${location.origin}/v/${shareId}`);
+      onShare(shareId);
     }
 
     this.setState({

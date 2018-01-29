@@ -5,7 +5,7 @@ import Controls from '../components/Controls';
 import Editor from '../components/Editor';
 import Output from '../components/Output';
 import codeExamples from '../lib/code-examples';
-import { createSnippet, getSnippet } from '../api/snippets';
+import { createSnippet, getSnippet, shareSnippet } from '../api/snippets';
 
 export default class extends Component {
   static async getInitialProps({ query, res }) {
@@ -149,6 +149,10 @@ export default class extends Component {
       });
   };
 
+  onShare = snippetId => {
+    shareSnippet(snippetId);
+  };
+
   onSvgStable = svg => {
     this.setState({
       svg
@@ -184,6 +188,7 @@ export default class extends Component {
             onVisualize={this.onVisualize}
             isShareAvailable={!snippetCreationFailed}
             shareId={lastSnippetId}
+            onShare={this.onShare}
           />
           <div className="editor-and-output">
             <Editor
