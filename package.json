@@ -40,19 +40,19 @@
     "react-ga": "^2.2.0",
     "react-measure": "^2.0.2",
     "react-numeric-input": "moroshko/react-numeric-input",
-    "rxjs": "^5.5.6",
+    "rxjs": "^6.2.1",
     "tinyqueue": "^1.2.2"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^3.19.0",
+    "babel-eslint": "^8.2.5",
+    "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.13.4",
     "jest": "^20.0.4",
     "lint-staged": "^3.6.1",
     "lodash.sortby": "^4.7.0",
     "lolex": "^1.6.0",
-    "prettier": "^1.4.4"
+    "prettier": "^1.13.7"
   },
   "lint-staged": {
     "*.js": [
