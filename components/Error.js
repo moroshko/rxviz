@@ -1,6 +1,7 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Observable } from 'rxjs';
+import { interval } from 'rxjs';
+import { map } from 'rxjs/operators';
 import Link from 'next/link';
 import Layout from './Layout';
 import RxViz from './RxViz';
@@ -10,7 +11,7 @@ const getVizParams = word => {
   const letters = word.split('');
 
   return {
-    observable$: Observable.interval(delay).map(i => letters[i]),
+    observable$: interval(delay).pipe(map(i => letters[i])),
     timeWindow: (letters.length + 1) * delay,
     width: 360
   };
@@ -73,9 +74,7 @@ export default class extends PureComponent {
             <RxViz timeWindow={timeWindow} observable$={observable$} />
           </div>
           <div className="inner-container" ref={this.animate}>
-            <h2 className="header">
-              {header}
-            </h2>
+            <h2 className="header">{header}</h2>
             <div className="instructions">
               Here are some pages you might want to visit instead:
               <ul>
@@ -107,7 +106,7 @@ export default class extends PureComponent {
             margin-left: 15px;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity .2s linear, transform .2s linear;
+            transition: opacity 0.2s linear, transform 0.2s linear;
           }
           .inner-container.visible {
             opacity: 1;
