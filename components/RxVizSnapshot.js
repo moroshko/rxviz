@@ -115,9 +115,9 @@ export default class RxVizSnapshot extends Component {
   }
 
   getElementsToMeasure(tooltips) {
-    return tooltips.map(({ text, textStyle }, tooltipIndex) =>
+    return tooltips.map(({ text, textStyle }, tooltipIndex) => (
       <TooltipText text={text} textStyle={textStyle} key={tooltipIndex} />
-    );
+    ));
   }
 
   onSvgRender = svg => {

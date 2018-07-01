@@ -101,17 +101,17 @@ export default class ObservableError extends Component {
           strokeWidth={errorStrokeWidth}
           stroke={mainColor}
         />
-        {tooltip
-          ? <rect
-              x={minX}
-              y={minY}
-              width={errorSize}
-              height={errorSize}
-              fill="transparent"
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-            />
-          : null}
+        {tooltip ? (
+          <rect
+            x={minX}
+            y={minY}
+            width={errorSize}
+            height={errorSize}
+            fill="transparent"
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          />
+        ) : null}
       </g>
     );
   }

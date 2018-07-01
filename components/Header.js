@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default () =>
+export default () => (
   <header className="container">
     <Link prefetch as="/" href="/?exampleId=basic-interval">
       <a>
@@ -58,10 +58,11 @@ export default () =>
         margin-left: auto;
       }
       .github-icon {
-        transition: fill .1s linear;
+        transition: fill 0.1s linear;
       }
       .github-link:hover .github-icon {
         fill: #fff;
       }
     `}</style>
-  </header>;
+  </header>
+);

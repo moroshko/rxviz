@@ -39,9 +39,7 @@ export default class extends Component {
     return (
       <div className="container">
         <Head>
-          <title>
-            RxViz - {title}
-          </title>
+          <title>RxViz - {title}</title>
           <meta
             name="description"
             content="Visualize any Rx Observable, and export SVG of the marble diagram."
@@ -60,9 +58,9 @@ export default class extends Component {
         </Head>
         <Header />
         <div className="inner-container">
-          {renderSidebar
-            ? <Sidebar activeItemId={sidebarActiveItemId} />
-            : null}
+          {renderSidebar ? (
+            <Sidebar activeItemId={sidebarActiveItemId} />
+          ) : null}
           {children}
         </div>
         <style jsx>{`

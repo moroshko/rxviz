@@ -90,13 +90,13 @@ export default class extends Component {
       <div className="container" ref={this.storeContainer}>
         {/* This div is needed so that users could append/prepend to the container. */}
         <div ref={this.storeVizContainer}>
-          {timeWindow && observable$
-            ? <RxViz
-                timeWindow={timeWindow}
-                observable$={observable$}
-                onSvgStable={this.onSvgStable}
-              />
-            : null}
+          {timeWindow && observable$ ? (
+            <RxViz
+              timeWindow={timeWindow}
+              observable$={observable$}
+              onSvgStable={this.onSvgStable}
+            />
+          ) : null}
         </div>
         <style jsx>{`
           .container {

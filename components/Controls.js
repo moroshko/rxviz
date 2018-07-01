@@ -189,12 +189,16 @@ export default class extends Component {
         icon={
           shareState === 'error'
             ? alertIcon
-            : shareState === 'shared' ? checkIcon : shareIcon
+            : shareState === 'shared'
+              ? checkIcon
+              : shareIcon
         }
         text={
           shareState === 'error'
             ? 'Failed'
-            : shareState === 'shared' ? 'Link copied' : 'Share link'
+            : shareState === 'shared'
+              ? 'Link copied'
+              : 'Share link'
         }
         style={{ width: 130, marginLeft: 15 }}
         onClick={this.onShare}
@@ -232,63 +236,64 @@ export default class extends Component {
 
     return (
       <Measure bounds={true} onResize={this.onResize}>
-        {({ measureRef }) =>
+        {({ measureRef }) => (
           <div
             ref={measureRef}
             style={{ height: 60 /* To avoid a jump from SSR */ }}
           >
-            {width === null
-              ? null
-              : <div className="container">
-                  <div className="inner-container">
-                    <form
-                      className="second-inner-container"
-                      onSubmit={this.onFormSubmit}
-                    >
-                      {this.renderTimeWindowInput()}
-                      {this.renderVisualizeButton()}
-                    </form>
+            {width === null ? null : (
+              <div className="container">
+                <div className="inner-container">
+                  <form
+                    className="second-inner-container"
+                    onSubmit={this.onFormSubmit}
+                  >
+                    {this.renderTimeWindowInput()}
+                    {this.renderVisualizeButton()}
+                  </form>
+                </div>
+                <div className="inner-container">
+                  <div className="second-inner-container">
+                    {this.renderCopySvgButton()}
+                    {this.renderShareButton()}
                   </div>
-                  <div className="inner-container">
-                    <div className="second-inner-container">
-                      {this.renderCopySvgButton()}
-                      {this.renderShareButton()}
-                    </div>
-                  </div>
-                  <style jsx>{`
-                    .container {
-                      display: flex;
-                      flex-shrink: 0;
-                    }
-                    .inner-container {
-                      flex: 1 1 50%;
-                    }
-                    .second-inner-container {
-                      display: flex;
-                      align-items: center;
-                      justify-content: flex-end;
-                      padding: 10px 25px 10px 0;
-                    }
-                  `}</style>
-                  <style jsx global>{`
-                    .react-numeric-input b {
-                      transition: transform .1s linear;
-                    }
-                    .react-numeric-input i {
-                      transition: border-color .1s linear;
-                    }
-                    .react-numeric-input b:hover {
-                      transform: scale(1.1);
-                    }
-                    .react-numeric-input b:nth-child(2):hover i {
-                      border-bottom-color: #fff !important;
-                    }
-                    .react-numeric-input b:nth-child(3):hover i {
-                      border-top-color: #fff !important;
-                    }
-                  `}</style>
-                </div>}
-          </div>}
+                </div>
+                <style jsx>{`
+                  .container {
+                    display: flex;
+                    flex-shrink: 0;
+                  }
+                  .inner-container {
+                    flex: 1 1 50%;
+                  }
+                  .second-inner-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    padding: 10px 25px 10px 0;
+                  }
+                `}</style>
+                <style jsx global>{`
+                  .react-numeric-input b {
+                    transition: transform 0.1s linear;
+                  }
+                  .react-numeric-input i {
+                    transition: border-color 0.1s linear;
+                  }
+                  .react-numeric-input b:hover {
+                    transform: scale(1.1);
+                  }
+                  .react-numeric-input b:nth-child(2):hover i {
+                    border-bottom-color: #fff !important;
+                  }
+                  .react-numeric-input b:nth-child(3):hover i {
+                    border-top-color: #fff !important;
+                  }
+                `}</style>
+              </div>
+            )}
+          </div>
+        )}
       </Measure>
     );
   }

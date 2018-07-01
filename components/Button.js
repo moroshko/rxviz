@@ -47,11 +47,7 @@ export default class extends Component {
         onClick={onClick}
       >
         {icon}
-        {size === 'large'
-          ? <span>
-              {text}
-            </span>
-          : null}
+        {size === 'large' ? <span>{text}</span> : null}
         <style jsx>{`
           button {
             display: flex;
@@ -64,7 +60,7 @@ export default class extends Component {
             color: #eeeff0;
             padding: 0 15px;
             opacity: 0.85;
-            transition: transform .1s linear, opacity .1s linear;
+            transition: transform 0.1s linear, opacity 0.1s linear;
           }
           button:hover {
             opacity: 1;

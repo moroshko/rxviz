@@ -119,7 +119,7 @@ export default class RxVizSnapshotSvg extends Component {
       const shouldRenderAxis = timeProgressedExists || observableEnded;
       const endTime = observableEnded ? observable.endTime : timeProgressed;
       const progressWidth = shouldRenderAxis
-        ? axisWidth * endTime / timeWindow
+        ? (axisWidth * endTime) / timeWindow
         : axisWidth;
 
       return (
@@ -156,7 +156,10 @@ export default class RxVizSnapshotSvg extends Component {
     return (
       <g style={tooltipsContainerStyle}>
         {tooltipsModels.map(
-          ({ x, y, width, height, text, textStyle, backgroundColor }, index) =>
+          (
+            { x, y, width, height, text, textStyle, backgroundColor },
+            index
+          ) => (
             <Tooltip
               arrowHeight={tooltipArrowHeight}
               rectX={x}
@@ -171,6 +174,7 @@ export default class RxVizSnapshotSvg extends Component {
               animate={animate}
               key={index}
             />
+          )
         )}
       </g>
     );
@@ -205,7 +209,9 @@ export default class RxVizSnapshotSvg extends Component {
     const vizMarginLeft = (shapeSize + shapeStrokeWidth) / 2;
     const marginLeft = vizMarginLeft + outerNameWidth;
     const axisWidth = width - marginLeft - arrowWidth;
-    const scale = scaleLinear().domain([0, timeWindow]).range([0, axisWidth]);
+    const scale = scaleLinear()
+      .domain([0, timeWindow])
+      .range([0, axisWidth]);
     const tooltipsModels = getTooltipsModels({
       tooltips,
       dimensions: tooltipsDimensions,

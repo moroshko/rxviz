@@ -168,11 +168,12 @@ export default class RxViz extends Component {
 
     return (
       <Measure bounds={true} onResize={this.onResize}>
-        {({ measureRef }) =>
+        {({ measureRef }) => (
           /* This div is needed to measure the available width. */
           <div ref={measureRef}>
             {width === null ? null : this.renderSnapshot()}
-          </div>}
+          </div>
+        )}
       </Measure>
     );
   }

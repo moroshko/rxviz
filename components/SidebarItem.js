@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
-const renderItem = ({ text, isActive }) =>
+const renderItem = ({ text, isActive }) => (
   <a className={isActive ? 'active' : null}>
     {text}
     <style jsx>{`
@@ -12,7 +12,7 @@ const renderItem = ({ text, isActive }) =>
         text-decoration: none;
         cursor: default;
         opacity: 0.6;
-        transition: opacity .1s linear;
+        transition: opacity 0.1s linear;
       }
       a:hover {
         background-color: #2c3038;
@@ -27,14 +27,17 @@ const renderItem = ({ text, isActive }) =>
         opacity: 1;
       }
     `}</style>
-  </a>;
+  </a>
+);
 
 const SidebarItem = ({ text, isActive, href, as }) =>
-  isActive
-    ? renderItem({ text, isActive })
-    : <Link prefetch as={as} href={href}>
-        {renderItem({ text, isActive })}
-      </Link>;
+  isActive ? (
+    renderItem({ text, isActive })
+  ) : (
+    <Link prefetch as={as} href={href}>
+      {renderItem({ text, isActive })}
+    </Link>
+  );
 
 SidebarItem.propTypes = {
   text: PropTypes.string.isRequired,

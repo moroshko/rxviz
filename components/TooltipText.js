@@ -33,10 +33,6 @@ export default class TooltipText extends Component {
       ...textStyle
     };
 
-    return (
-      <text style={style}>
-        {lines.map(this.renderLine)}
-      </text>
-    );
+    return <text style={style}>{lines.map(this.renderLine)}</text>;
   }
 }
