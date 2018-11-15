@@ -4,51 +4,9 @@ import Layout from '../components/Layout';
 import Controls from '../components/Controls';
 import Editor from '../components/Editor';
 import Output from '../components/Output';
-import codeExamples from '../lib/code-examples';
-import { createSnippet, getSnippet, shareSnippet } from '../api/snippets';
+import { createSnippet, shareSnippet } from '../api/snippets';
 
 export default class extends Component {
-  static async getInitialProps({ query, res }) {
-    const { snippetId } = query;
-
-    if (snippetId) {
-      // came from /v/hashid
-      return getSnippet(snippetId)
-        .then(({ code, timeWindow }) => ({
-          exampleId: 'custom',
-          code,
-          timeWindow
-        }))
-        .catch(() => {
-          // on the client, res will be undefined
-          if (res) {
-            res.statusCode = 404;
-          }
-
-          return {
-            errorStatusCode: 404
-          };
-        });
-    }
-
-    // came from /examples/exampleId
-    const { exampleId } = query;
-
-    if (exampleId && codeExamples[exampleId]) {
-      const { code, timeWindow } = codeExamples[exampleId];
-
-      return {
-        exampleId,
-        code,
-        timeWindow
-      };
-    }
-
-    return {
-      errorStatusCode: 404
-    };
-  }
-
   constructor(props) {
     super();
 

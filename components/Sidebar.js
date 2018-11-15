@@ -2,6 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import codeExamples from '../lib/code-examples';
 import SidebarItem from './SidebarItem';
+import SidebarParentItem from './SidebarParentItem';
 
 export default class extends Component {
   static propTypes = {
@@ -24,7 +25,7 @@ export default class extends Component {
         <ul className="examples-container">
           {exampleIds.map(exampleId => {
             const isActive = exampleId === activeItemId;
-            const { name } = codeExamples[exampleId];
+            const { name, childExamples } = codeExamples[exampleId];
 
             return (
               <li
@@ -32,12 +33,22 @@ export default class extends Component {
                 ref={isActive ? this.scrollToActiveItem : null}
                 key={exampleId}
               >
-                <SidebarItem
-                  text={name}
-                  isActive={isActive}
-                  href={`/?exampleId=${exampleId}`}
-                  as={`/examples/${exampleId}`}
-                />
+                {childExamples ? (
+                  <SidebarParentItem
+                    text={name}
+                    isActive={isActive}
+                    href={`/?exampleId=${exampleId}`}
+                    as={`/examples/${exampleId}`}
+                    childExamples={childExamples}
+                  />
+                ) : (
+                  <SidebarItem
+                    text={name}
+                    isActive={isActive}
+                    href={`/?exampleId=${exampleId}`}
+                    as={`/examples/${exampleId}`}
+                  />
+                )}
               </li>
             );
           })}
