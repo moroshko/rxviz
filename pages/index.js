@@ -55,6 +55,17 @@ export default class extends Component {
     this.state = this.resetState(props);
   }
 
+  componentDidMount() {
+    const codeDump = localStorage.getItem('rxviz-code-dump');
+
+    if (codeDump) {
+      // eslint-disable-next-line react/no-did-mount-set-state
+      this.setState({
+        code: codeDump
+      });
+    }
+  }
+
   resetState(props) {
     return {
       errorStatusCode: props.errorStatusCode,
@@ -108,6 +119,8 @@ export default class extends Component {
     this.setState({
       code
     });
+
+    localStorage.setItem('rxviz-code-dump', code);
   };
 
   onVisualize = () => {

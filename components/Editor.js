@@ -10,8 +10,14 @@ export default class extends Component {
     onCmdEnter: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super();
+
+    this.initialValue = props.value;
+  }
+
   componentDidMount() {
-    const { value, onCmdEnter } = this.props;
+    const { onCmdEnter } = this.props;
     const codemirror = require('codemirror');
 
     // This fails on the server with: `navigator` is not defined
@@ -32,7 +38,7 @@ export default class extends Component {
       });
 
       this.codeMirror.on('change', this.onChange);
-      this.codeMirror.setValue(value);
+      this.codeMirror.setValue(this.initialValue);
 
       /*
         Without this, when browser's cache is disabled,
@@ -45,6 +51,11 @@ export default class extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (!this.codeMirror) {
+      this.initialValue = nextProps.value;
+      return;
+    }
+
     if (nextProps.value !== this.codeMirror.getValue()) {
       this.codeMirror.setValue(nextProps.value);
     }
