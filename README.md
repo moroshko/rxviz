@@ -1,15 +1,22 @@
 # <a href='https://rxviz.com'><img src='https://user-images.githubusercontent.com/259753/26937967-b6bd7262-4c27-11e7-97f3-29878d7ec468.png' height='60' alt='RxViz logo'></a>
 
-* [Description](#description)
-* [Examples](#examples)
-  * [Basic Interval](#basic-interval)
-  * [Random error](#random-error)
-  * [Higher order Observable](#higher-order-observable)
-  * [Pause and resume](#pause-and-resume)
-* [How does it work?](#how-does-it-work)
-  * [How about higher order Observables?](#how-about-higher-order-observables)
-* [Thanks](#thanks)
-* [Running locally](#running-locally)
+- [Project Status](#project-status)
+- [Description](#description)
+- [Examples](#examples)
+  - [Basic Interval](#basic-interval)
+  - [Random error](#random-error)
+  - [Higher order Observable](#higher-order-observable)
+  - [Pause and resume](#pause-and-resume)
+- [How does it work?](#how-does-it-work)
+  - [How about higher order Observables?](#how-about-higher-order-observables)
+- [Thanks](#thanks)
+- [Running locally](#running-locally)
+
+## Project Status
+
+Looking for maintainers!
+
+Unfortunately, I don't have the time to maintain this project anymore. If you are interested to help, please reach out to me on Twitter [@moroshko](https://twitter.com/moroshko).
 
 ## Description
 
@@ -17,9 +24,9 @@ RxViz simply visualizes a given Observable. Your JavaScript code will be evaluat
 
 You can also:
 
-* Control the speed of the animation by modifying the **Time window** input.
-* Copy the resulting SVG to include in your next Rx presentation.
-* Share the visualization with your friends.
+- Control the speed of the animation by modifying the **Time window** input.
+- Copy the resulting SVG to include in your next Rx presentation.
+- Share the visualization with your friends.
 
 ## Examples
 
@@ -53,11 +60,11 @@ When an Observable value is seen, we subscribe to it. At this point, we create a
 
 ## Thanks
 
-* [Vedran Arnautović](https://twitter.com/vedranio) for designing [rxviz.com](https://rxviz.com)
-* [Yuki Izumi](https://github.com/kivikakk) for always being helpful with random technical questions
-* [zeit.co](https://zeit.co) for outstanding developer experience with [next.js](https://github.com/zeit/next.js) and [domains](https://zeit.co/domains)
-* [André Staltz](https://twitter.com/andrestaltz) for creating [rxmarbles.com](http://rxmarbles.com) and [awesome RxJS courses on egghead.io](https://egghead.io/courses#technology-rx)
-* [Canny](https://canny.io) for collecting [your feedback](https://rxviz.com/feedback)
+- [Vedran Arnautović](https://twitter.com/vedranio) for designing [rxviz.com](https://rxviz.com)
+- [Yuki Izumi](https://github.com/kivikakk) for always being helpful with random technical questions
+- [zeit.co](https://zeit.co) for outstanding developer experience with [next.js](https://github.com/zeit/next.js) and [domains](https://zeit.co/domains)
+- [André Staltz](https://twitter.com/andrestaltz) for creating [rxmarbles.com](http://rxmarbles.com) and [awesome RxJS courses on egghead.io](https://egghead.io/courses#technology-rx)
+- [Canny](https://canny.io) for collecting [your feedback](https://rxviz.com/feedback)
 
 ## Running locally
 
