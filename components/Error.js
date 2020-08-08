@@ -79,7 +79,7 @@ export default class extends PureComponent {
               Here are some pages you might want to visit instead:
               <ul>
                 <li>
-                  <Link prefetch as="/" href="/?exampleId=basic-interval">
+                  <Link as="/" href="/?exampleId=basic-interval">
                     <a>Rx Visualizer home page</a>
                   </Link>
                 </li>

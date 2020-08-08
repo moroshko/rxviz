@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default () => (
   <header className="container">
-    <Link prefetch as="/" href="/?exampleId=basic-interval">
+    <Link as="/" href="/?exampleId=basic-interval">
       <a>
         <svg className="logo" width="44" height="44" fillRule="evenodd">
           <path
