@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Layout from '../components/Layout';
 
-const feedback = () => {
+const Feedback = () => {
   let mountCount = 0;
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const feedback = () => {
   );
 };
 
-export default feedback;
+export default Feedback;
