@@ -20,7 +20,7 @@ const feedback = () => {
       basePath: '/feedback',
       ssoToken: null
     });
-  });
+  }, []);
 
   return (
     <Layout title="Feedback" sidebarActiveItemId="feedback">
