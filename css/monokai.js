@@ -1,4 +1,6 @@
-export default `
+import { css } from 'styled-jsx/css';
+
+export default css.global`
 .cm-s-monokai.CodeMirror {
   background-color: inherit;
   color: #f8f8f2;

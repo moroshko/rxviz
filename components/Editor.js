@@ -73,7 +73,12 @@ export default class extends Component {
             padding-top: 6px;
           }
         `}</style>
-        <style jsx global>{`${codeMirrorStyles}\n${monokaiStyles}`}</style>
+        <style jsx global>
+          {codeMirrorStyles}
+        </style>
+        <style jsx global>
+          {monokaiStyles}
+        </style>
       </div>
     );
   }

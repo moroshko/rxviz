@@ -34,7 +34,7 @@ const SidebarItem = ({ text, isActive, href, as }) =>
   isActive ? (
     renderItem({ text, isActive })
   ) : (
-    <Link prefetch as={as} href={href}>
+    <Link as={as} href={href}>
       {renderItem({ text, isActive })}
     </Link>
   );

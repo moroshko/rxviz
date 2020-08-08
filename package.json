@@ -18,7 +18,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "codemirror": "^5.26.0",
+    "codemirror": "^5.56.0",
     "color": "^1.0.3",
     "copy-to-clipboard": "^3.0.6",
     "d3-path": "^1.0.5",
@@ -33,10 +33,10 @@
     "lodash.isundefined": "^3.0.1",
     "lodash.omit": "^4.5.0",
     "lodash.set": "^4.3.2",
-    "next": "3.0.0-beta9",
+    "next": "^9.5.1",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-ga": "^2.2.0",
     "react-measure": "^2.0.2",
     "react-numeric-input": "moroshko/react-numeric-input",
