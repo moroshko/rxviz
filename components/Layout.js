@@ -49,7 +49,7 @@ export default class extends Component {
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />
-          <link rel="shortcut icon" href="/static/favicon.png" />
+          <link rel="shortcut icon" href="/favicon.png" />
           <link
             href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Montserrat:700"
             rel="stylesheet"
