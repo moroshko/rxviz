@@ -32,9 +32,13 @@ export default class extends Component {
     }
 
     // came from /examples/exampleId
-    const { exampleId } = query;
+    let { exampleId } = query;
 
-    if (exampleId && codeExamples[exampleId]) {
+    if (!exampleId) {
+      exampleId = 'basic-interval';
+    }
+
+    if (codeExamples[exampleId]) {
       const { code, timeWindow } = codeExamples[exampleId];
 
       return {
