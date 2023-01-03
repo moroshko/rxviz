@@ -48,7 +48,7 @@
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.13.4",
-    "jest": "^20.0.4",
+    "jest": "^29.3.1",
     "lint-staged": "^3.6.1",
     "lodash.sortby": "^4.7.0",
     "lolex": "^1.6.0",
