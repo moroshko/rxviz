@@ -1,4 +1,4 @@
-# <a href='https://rxviz.com'><img src='https://user-images.githubusercontent.com/259753/26937967-b6bd7262-4c27-11e7-97f3-29878d7ec468.png' height='60' alt='RxViz logo'></a>
+# <a href='https://rx-viz.vercel.app'><img src='https://user-images.githubusercontent.com/259753/26937967-b6bd7262-4c27-11e7-97f3-29878d7ec468.png' height='60' alt='RxViz logo'></a>
 
 - [Project Status](#project-status)
 - [Description](#description)
@@ -32,19 +32,19 @@ You can also:
 
 ### Basic interval
 
-[![rxviz-basic-interval](https://user-images.githubusercontent.com/259753/26908333-f27e17f8-4bae-11e7-87b8-3851778e9cf6.gif)](https://rxviz.com/examples/basic-interval)
+[![rxviz-basic-interval](https://user-images.githubusercontent.com/259753/26908333-f27e17f8-4bae-11e7-87b8-3851778e9cf6.gif)](https://rx-viz.vercel.app/examples/basic-interval)
 
 ### Random error
 
-[![rxviz-random-error](https://user-images.githubusercontent.com/259753/27258497-e7eeb36a-53b0-11e7-8399-8e3cea31f7e6.gif)](https://rxviz.com/examples/random-error)
+[![rxviz-random-error](https://user-images.githubusercontent.com/259753/27258497-e7eeb36a-53b0-11e7-8399-8e3cea31f7e6.gif)](https://rx-viz.vercel.app/examples/random-error)
 
 ### Higher order Observable
 
-[![rxviz-higher-order-observable](https://user-images.githubusercontent.com/259753/26908347-fefb6fa8-4bae-11e7-8d06-0658e3cf1e17.gif)](https://rxviz.com/examples/higher-order-observable)
+[![rxviz-higher-order-observable](https://user-images.githubusercontent.com/259753/26908347-fefb6fa8-4bae-11e7-8d06-0658e3cf1e17.gif)](https://rx-viz.vercel.app/examples/higher-order-observable)
 
 ### Pause and resume
 
-[![rxviz-pause-and-resume](https://user-images.githubusercontent.com/259753/26908310-bb0f8540-4bae-11e7-9bb7-9520ec567fdf.gif)](https://rxviz.com/examples/pause-and-resume)
+[![rxviz-pause-and-resume](https://user-images.githubusercontent.com/259753/26908310-bb0f8540-4bae-11e7-9bb7-9520ec567fdf.gif)](https://rx-viz.vercel.app/examples/pause-and-resume)
 
 ## How does it work?
 
@@ -60,11 +60,11 @@ When an Observable value is seen, we subscribe to it. At this point, we create a
 
 ## Thanks
 
-- [Vedran Arnautović](https://twitter.com/vedranio) for designing [rxviz.com](https://rxviz.com)
+- [Vedran Arnautović](https://twitter.com/vedranio) for designing [rx-viz.vercel.app](https://rx-viz.vercel.app)
 - [Yuki Izumi](https://github.com/kivikakk) for always being helpful with random technical questions
 - [zeit.co](https://zeit.co) for outstanding developer experience with [next.js](https://github.com/zeit/next.js) and [domains](https://zeit.co/domains)
 - [André Staltz](https://twitter.com/andrestaltz) for creating [rxmarbles.com](http://rxmarbles.com) and [awesome RxJS courses on egghead.io](https://egghead.io/courses#technology-rx)
-- [Canny](https://canny.io) for collecting [your feedback](https://rxviz.com/feedback)
+- [Canny](https://canny.io) for collecting [your feedback](https://rx-viz.vercel.app/feedback)
 
 ## Running locally
 
