@@ -18,7 +18,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "codemirror": "^5.56.0",
+    "codemirror": "^5.58.2",
     "color": "^1.0.3",
     "copy-to-clipboard": "^3.0.6",
     "d3-path": "^1.0.5",
